@@ -17,7 +17,12 @@ dlib = "^19.24.5"
 setuptools = "^72.1.0"
 django-haystack = "^3.3.0"
 elasticsearch = "^8.14.0"
+mysqlclient = "^2.2.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+
+
