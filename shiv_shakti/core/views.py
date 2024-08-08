@@ -10,6 +10,9 @@ from .serializers import UserSerializer, UserProfileSerializer, AlbumSerializer,
     ActivityLogSerializer
 from haystack.query import SearchQuerySet
 from rest_framework import serializers
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.core.exceptions import ObjectDoesNotExist
+from .models import InvitationCode
 
 class SearchView(generics.ListAPIView):
     serializer_class = serializers.SerializerMethodField()
@@ -44,12 +47,45 @@ def login(request):
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
     if user:
+        refresh = RefreshToken.for_user(user)
+        user_data = UserSerializer(user).data
         return Response({
-            'username': user.username,
-            'email': user.email,
+            'succesLoggged': True,
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            'user': user_data,
         })
     return Response({'error': 'Invalid Credentials'}, status=400)
 
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def generateWithInvitation(request):
+    username = request.data.get('username')
+    invitation_code = request.data.get('invitation_code')
+    
+    if not username or not invitation_code:
+        return Response({'error': 'Username and invitation code are required.'}, status=400)
+    
+    try:
+        user = User.objects.get(username=username)
+    except ObjectDoesNotExist:
+        return Response({'error': 'User not found.'}, status=404)
+
+    try:
+        valid_invitation = InvitationCode.objects.get(user=user, code=invitation_code)
+    except ObjectDoesNotExist:
+        return Response({'error': 'Invalid invitation code.'}, status=400)
+    
+    refresh = RefreshToken.for_user(user)
+    
+    return Response({
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+        'username': user.username,
+        'email': user.email,
+        'success': True,
+    })
 
 def create_notification(user, message):
     if isinstance(user, User):
