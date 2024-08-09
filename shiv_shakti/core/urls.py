@@ -1,8 +1,8 @@
 from django.urls import path, include
-from .views import SearchView
+from .views import generateWithInvitation, reset_password, SearchView
 from rest_framework.routers import DefaultRouter
 from .views import UserProfileViewSet, AlbumViewSet, PhotoViewSet, EventViewSet, GuestViewSet, InvitationViewSet, CommentViewSet, SharedAlbumViewSet, NotificationViewSet, ActivityLogViewSet, RegisterView, login
-
+from rest_framework_simplejwt.views import TokenRefreshView
 
 router = DefaultRouter()
 router.register(r'user-profiles', UserProfileViewSet)
@@ -19,8 +19,12 @@ router.register(r'activity-logs', ActivityLogViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('register/', RegisterView.as_view(), name='register'),
-    path('login/', login, name='login'),
+    path('token/generate', login, name='login'),
+    path('token/generateWithInvitation', generateWithInvitation, name='generateWithInvitation'),
+    path('password/reset/', reset_password, name='reset_password'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+
 urlpatterns += [
     path('search/', SearchView.as_view(), name='search'),
 ]
