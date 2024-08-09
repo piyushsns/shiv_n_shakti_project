@@ -1,4 +1,5 @@
 from django.urls import path, include
+from core.utils import send_test_email
 from .views import generateWithInvitation, reset_password, SearchView
 from rest_framework.routers import DefaultRouter
 from .views import UserProfileViewSet, AlbumViewSet, PhotoViewSet, EventViewSet, GuestViewSet, InvitationViewSet, CommentViewSet, SharedAlbumViewSet, NotificationViewSet, ActivityLogViewSet, RegisterView, login
@@ -17,6 +18,7 @@ router.register(r'notifications', NotificationViewSet)
 router.register(r'activity-logs', ActivityLogViewSet)
 
 urlpatterns = [
+    path('testmail', send_test_email),
     path('', include(router.urls)),
     path('register/', RegisterView.as_view(), name='register'),
     path('token/generate', login, name='login'),
