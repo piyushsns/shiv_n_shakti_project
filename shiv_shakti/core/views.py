@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from core.utils import send_email_via_api
 from .models import UserProfile, Album, Photo, Event, Guest, Invitation, Comment, SharedAlbum, Notification, ActivityLog
 from .serializers import UserSerializer, UserProfileSerializer, AlbumSerializer, PhotoSerializer, EventSerializer, \
     GuestSerializer, InvitationSerializer, CommentSerializer, SharedAlbumSerializer, NotificationSerializer, \
@@ -16,7 +17,12 @@ from .models import InvitationCode
 from django.utils.crypto import get_random_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
-from django.core.mail import send_mail
+from django.template.loader import render_to_string, get_template
+from django.contrib.auth.forms import SetPasswordForm
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
 
 class SearchView(generics.ListAPIView):
     serializer_class = serializers.SerializerMethodField()
@@ -90,6 +96,7 @@ def generateWithInvitation(request):
         'user': UserSerializer(user).data,
     })
 
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def reset_password(request):
@@ -97,17 +104,60 @@ def reset_password(request):
     try:
         user = User.objects.get(email=email)
         token = default_token_generator.make_token(user)
-        reset_url = f'{settings.FRONTEND_URL}/reset-password/{token}/'
-        send_mail(
-            'Password Reset Request',
-            f'Click the link below to reset your password:\n\n{reset_url}',
-            settings.DEFAULT_FROM_EMAIL,
-            [email],
-        )
-        return Response({'message': 'Password reset link sent successfully.'})
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        reset_url = f'{settings.FRONTEND_URL}/api/reset-password/{uid}/{token}/'
+
+        # Prepare the email content with HTML format
+        email_content = f"""
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Password Reset Request</title>
+        </head>
+        <body>
+            <p>Hi {user.username},</p>
+            <p>You have requested to reset your password. Please click the link below to reset your password:</p>
+            <p><a href="{reset_url}">Reset Password</a></p>
+            <p>If you did not request a password reset, please ignore this email.</p>
+            <p>Thank you,</p>
+            <p>Quick Snap Team</p>
+        </body>
+        </html>
+        """
+
+        # Prepare the email subject
+        subject = 'Password Reset Request'
+
+        # Send the email using the API function
+        email_response = send_email_via_api(to_email=email, subject=subject, message=email_content)
+        print(email_response)
+        if email_response.get('success') == True:
+            return Response({'message': 'Password reset link sent successfully.'})
+        else:
+            return Response({'error': 'Failed to send email.'}, status=500)
     except User.DoesNotExist:
         return Response({'error': 'User with this email does not exist.'}, status=404)
+from django.utils.http import urlsafe_base64_decode
+def reset_password_confirm(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
 
+    if user is not None and default_token_generator.check_token(user, token):
+        if request.method == 'POST':
+            form = SetPasswordForm(user, request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponse("You have successfully reset your password now you can use in you mobile app to login.", status=400) # Redirect to login after password reset
+        else:
+            form = SetPasswordForm(user)
+        return render(request, 'core/reset_password_confirm.html', {'form': form, "uidb64":uidb64, "token":token})
+    else:
+        return HttpResponse("Invalid token", status=400)
+    
 def create_notification(user, message):
     if isinstance(user, User):
         Notification.objects.create(user=user, message=message)
@@ -115,10 +165,8 @@ def create_notification(user, message):
         for u in user:
             Notification.objects.create(user=u, message=message)
 
-
 def log_activity(user, action, details=None):
     ActivityLog.objects.create(user=user, action=action, details=details)
-
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()

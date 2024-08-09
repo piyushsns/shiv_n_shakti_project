@@ -1,6 +1,6 @@
 from django.urls import path, include
 from core.utils import send_test_email
-from .views import generateWithInvitation, reset_password, SearchView
+from .views import generateWithInvitation, reset_password, reset_password_confirm, SearchView
 from rest_framework.routers import DefaultRouter
 from .views import UserProfileViewSet, AlbumViewSet, PhotoViewSet, EventViewSet, GuestViewSet, InvitationViewSet, CommentViewSet, SharedAlbumViewSet, NotificationViewSet, ActivityLogViewSet, RegisterView, login
 from rest_framework_simplejwt.views import TokenRefreshView
@@ -25,6 +25,7 @@ urlpatterns = [
     path('token/generateWithInvitation', generateWithInvitation, name='generateWithInvitation'),
     path('password/reset/', reset_password, name='reset_password'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('reset-password/<uidb64>/<token>/', reset_password_confirm, name='password_reset_confirm'),
 ]
 
 urlpatterns += [
