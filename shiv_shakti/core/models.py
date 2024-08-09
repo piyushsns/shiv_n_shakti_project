@@ -71,14 +71,22 @@ class Guest(models.Model):
 
     def __str__(self):
         return self.name
+    
+class InvitationCode(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='invitation')
+    code = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Invitation code for {self.user.username}"
+    
 class Invitation(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_invitations')
     recipient_email = models.EmailField()
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='invitations')
     status = models.CharField(max_length=50, choices=[('pending', 'Pending'), ('accepted', 'Accepted'), ('declined', 'Declined')], default='pending')
     sent_at = models.DateTimeField(auto_now_add=True)
-
+    invitation_code = models.CharField(max_length=255, unique=True, default="", blank=True)
     def __str__(self):
         return f'Invitation from {self.sender} to {self.recipient_email}'
 
@@ -123,12 +131,3 @@ class ActivityLog(models.Model):
 
     def __str__(self):
         return f'ActivityLog by {self.user.username} - {self.action}'
-    
-    
-class InvitationCode(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='invitation')
-    code = models.CharField(max_length=255, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Invitation code for {self.user.username}"

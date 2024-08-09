@@ -6,9 +6,8 @@ from django.contrib.auth import authenticate
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from core.utils import send_email_via_api
 from .models import UserProfile, Album, Photo, Event, Guest, Invitation, Comment, SharedAlbum, Notification, ActivityLog
-from .serializers import UserSerializer, UserProfileSerializer, AlbumSerializer, PhotoSerializer, EventSerializer, \
-    GuestSerializer, InvitationSerializer, CommentSerializer, SharedAlbumSerializer, NotificationSerializer, \
-    ActivityLogSerializer
+from .serializers import *
+from rest_framework import status
 from haystack.query import SearchQuerySet
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -23,6 +22,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import AcceptInvitationForm
+from django.contrib import messages
 
 class SearchView(generics.ListAPIView):
     serializer_class = serializers.SerializerMethodField()
@@ -49,6 +51,15 @@ class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     permission_classes = (AllowAny,)
     serializer_class = UserSerializer
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register(request):
+    serializer = RegistrationSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Congratulations! your account has been created successfully, also we have invited you select contacts'}, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -83,7 +94,7 @@ def generateWithInvitation(request):
         return Response({'error': 'User not found.'}, status=404)
 
     try:
-        InvitationCode.objects.get(user=user, code=invitation_code)
+        Invitation.objects.get(user=user, invitation_code=invitation_code)
     except ObjectDoesNotExist:
         return Response({'error': 'Invalid invitation code.'}, status=400)
     
@@ -167,6 +178,34 @@ def create_notification(user, message):
 
 def log_activity(user, action, details=None):
     ActivityLog.objects.create(user=user, action=action, details=details)
+
+def accept_invitation(request, invitation_code):
+    # Retrieve the invitation using the provided code
+    invitation = get_object_or_404(Invitation, invitation_code=invitation_code)
+
+    if request.method == 'POST':
+        form = AcceptInvitationForm(request.POST)
+        if form.is_valid():
+            # Create a new user using the form data
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+
+            # Mark the invitation as accepted
+            invitation.status = 'accepted'
+            invitation.save()
+
+            # Optionally, you can assign the user to the event or perform other actions here
+
+            # Show a success message
+            messages.success(request, 'You have successfully accepted the invitation and registered.')
+
+            # Redirect to a success page or login page
+            return HttpResponse("You have successfully accepted the invitation and registered. now you can use in you mobile app to login.", status=400) # Redirect to login after password reset
+    else:
+        form = AcceptInvitationForm(initial={'email': invitation.recipient_email})
+
+    return render(request, 'core/accept_invitation.html', {'form': form, 'invitation': invitation})
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()

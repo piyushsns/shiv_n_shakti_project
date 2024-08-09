@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're Invited!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 10px 0;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .content p {
+            font-size: 16px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>You're Invited!</h1>
+        </div>
+        <div class="content">
+            <p>Hi there!</p>
+            <p>You have been invited by {{ user.first_name }} to join their event.</p>
+            <p>Click the button below to accept the invitation:</p>
+            <a href="{{ reset_url }}" class="btn">Accept Invitation</a>
+            <p>Or use this invitation code: <strong>{{ invitation_code }}</strong></p>
+        </div>
+        <div class="footer">
+            <p>Thank you for joining us!</p>
+            <p>Quick Snap Team</p>
+        </div>
+    </div>
+</body>
+</html>
