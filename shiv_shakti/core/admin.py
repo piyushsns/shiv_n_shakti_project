@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import ActivityLog, Album, Comment, Event, Guest, Invitation, Notification, Photo, SharedAlbum, UserProfile
+from core.models import ActivityLog, Album, Comment, Event, Guest, Invitation, Notification, Photo, SharedAlbum, UserProfile, InvitationCode
 
 # Customize the admin site titles and headers
 admin.site.site_header = "Shiv & Shakti App Administration"
@@ -54,6 +54,13 @@ class EventAdmin(admin.ModelAdmin):
     ordering = ['-date']
     inlines = [GuestInline]
 
+@admin.register(InvitationCode)
+class InvitationCodeAdmin(admin.ModelAdmin):
+    list_display = ['user', 'code', 'created_at']
+    search_fields = ['user', 'code', 'created_at']
+    list_filter = ['code', 'user', 'created_at']
+    ordering = ['user']
+    
 @admin.register(Guest)
 class GuestAdmin(admin.ModelAdmin):
     list_display = ['name', 'email', 'phone', 'event']

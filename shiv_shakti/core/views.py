@@ -13,6 +13,10 @@ from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.exceptions import ObjectDoesNotExist
 from .models import InvitationCode
+from django.utils.crypto import get_random_string
+from django.contrib.auth.tokens import default_token_generator
+from django.conf import settings
+from django.core.mail import send_mail
 
 class SearchView(generics.ListAPIView):
     serializer_class = serializers.SerializerMethodField()
@@ -73,19 +77,36 @@ def generateWithInvitation(request):
         return Response({'error': 'User not found.'}, status=404)
 
     try:
-        valid_invitation = InvitationCode.objects.get(user=user, code=invitation_code)
+        InvitationCode.objects.get(user=user, code=invitation_code)
     except ObjectDoesNotExist:
         return Response({'error': 'Invalid invitation code.'}, status=400)
     
     refresh = RefreshToken.for_user(user)
     
     return Response({
+        'succesLoggged': True,
         'refresh': str(refresh),
         'access': str(refresh.access_token),
-        'username': user.username,
-        'email': user.email,
-        'success': True,
+        'user': UserSerializer(user).data,
     })
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def reset_password(request):
+    email = request.data.get('email')
+    try:
+        user = User.objects.get(email=email)
+        token = default_token_generator.make_token(user)
+        reset_url = f'{settings.FRONTEND_URL}/reset-password/{token}/'
+        send_mail(
+            'Password Reset Request',
+            f'Click the link below to reset your password:\n\n{reset_url}',
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+        )
+        return Response({'message': 'Password reset link sent successfully.'})
+    except User.DoesNotExist:
+        return Response({'error': 'User with this email does not exist.'}, status=404)
 
 def create_notification(user, message):
     if isinstance(user, User):
@@ -111,7 +132,6 @@ class AlbumViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'description', 'user__username']
     permission_classes = [IsAuthenticated]
-
 
 class PhotoViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
