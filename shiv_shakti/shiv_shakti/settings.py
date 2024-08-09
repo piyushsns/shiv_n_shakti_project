@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'core'
+    'core',
+    'django_filters'
 ]
 
 INSTALLED_APPS += ['haystack']
@@ -88,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'shivnshakti',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'Temp@1234',
         'HOST': 'localhost',  # Or your MySQL server address
         'PORT': '3306',       # Default MySQL port
     }
@@ -127,7 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = 'static/'
 if DEBUG:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -138,6 +140,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',  # For the browsable API
+    ),
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
@@ -193,3 +199,4 @@ SIMPLE_JWT = {
 }
 
 FRONTEND_URL = 'http://192.168.1.9:8000'
+CSRF_TRUSTED_ORIGINS = ['https://quicksnap.mytiny.us']
