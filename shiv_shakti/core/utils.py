@@ -2,7 +2,7 @@ import json
 import requests
 from django.http import JsonResponse
 
-def send_email_via_api(to_email, subject, message):
+def send_email_via_api(to_email, subject, message, attachments=[]):
     url = "https://cashfreeapi.snssystem.com/api/v1/send-message"
     token = "a1JfX6rUsKcjnvEopok8"
 
@@ -46,10 +46,14 @@ def upload_file_to_s3(file_path, file_type="public"):
     }
 
     # Prepare the file to be uploaded
-    files = {
-        'attachments': open(file_path, 'rb')
-    }
-
+    if type(file_path) is str:
+        files = {
+            'attachments': open(file_path, 'rb')
+        }
+    else:
+        files = {
+            'attachments': file_path
+        }
     # Perform the POST request
     response = requests.post(url, data=payload, files=files)
 

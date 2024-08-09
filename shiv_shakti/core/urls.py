@@ -3,11 +3,12 @@ from core.utils import send_test_email
 from .views import (accept_invitation, generateWithInvitation, reset_password,
     reset_password_confirm, SearchView)
 from rest_framework.routers import DefaultRouter
-from .views import UserProfileViewSet, AlbumViewSet, PhotoViewSet, EventViewSet, GuestViewSet, InvitationViewSet, CommentViewSet, SharedAlbumViewSet, NotificationViewSet, ActivityLogViewSet, RegisterView, login
+from .views import UserProfileViewSet, AlbumViewSet, PhotoViewSet, EventViewSet, GuestViewSet, InvitationViewSet, CommentViewSet, SharedAlbumViewSet, NotificationViewSet, ActivityLogViewSet, login, RegistrationUserViewSet
 from rest_framework_simplejwt.views import TokenRefreshView
 
 router = DefaultRouter()
 router.register(r'user-profiles', UserProfileViewSet)
+router.register(r'resgister', RegistrationUserViewSet)
 router.register(r'albums', AlbumViewSet)
 router.register(r'photos', PhotoViewSet)
 router.register(r'events', EventViewSet)
@@ -21,7 +22,6 @@ router.register(r'activity-logs', ActivityLogViewSet)
 urlpatterns = [
     path('testmail', send_test_email),
     path('', include(router.urls)),
-    path('register/', RegisterView.as_view(), name='register'),
     path('token/generate', login, name='login'),
     path('token/generateWithInvitation', generateWithInvitation, name='generateWithInvitation'),
     path('password/reset/', reset_password, name='reset_password'),

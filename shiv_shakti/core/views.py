@@ -3,28 +3,29 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from core.utils import send_email_via_api
 from .models import UserProfile, Album, Photo, Event, Guest, Invitation, Comment, SharedAlbum, Notification, ActivityLog
 from .serializers import *
-from rest_framework import status
+from .registration_serializer import RegistrationSerializer
 from haystack.query import SearchQuerySet
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.core.exceptions import ObjectDoesNotExist
-from .models import InvitationCode
-from django.utils.crypto import get_random_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
-from django.template.loader import render_to_string, get_template
 from django.contrib.auth.forms import SetPasswordForm
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from .forms import AcceptInvitationForm
 from django.contrib import messages
+from django_filters.rest_framework import DjangoFilterBackend
+from .utils import upload_file_to_s3
+from django.utils.http import urlsafe_base64_decode
+from rest_framework import status
 
 class SearchView(generics.ListAPIView):
     serializer_class = serializers.SerializerMethodField()
@@ -46,20 +47,26 @@ class SearchView(generics.ListAPIView):
             return SearchQuerySet().models(Photo).filter(content=query)
         elif model == 'event':
             return SearchQuerySet().models(Event).filter(content=query)
-
-class RegisterView(generics.CreateAPIView):
+        
+class RegistrationUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    permission_classes = (AllowAny,)
-    serializer_class = UserSerializer
-
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def register(request):
-    serializer = RegistrationSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response({'message': 'Congratulations! your account has been created successfully, also we have invited you select contacts'}, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    serializer_class = RegistrationSerializer
+    permission_classes = [AllowAny]
+    
+    def create(self, request, *args, **kwargs):
+        serializer = RegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            refresh = RefreshToken.for_user(serializer.instance)
+            user_data = UserSerializer(serializer.instance).data
+            return Response({
+                'message': 'Congratulations! your account has been created successfully, also we have invited you select contacts',
+                'succesLoggged': True,
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+                'user': user_data,
+            })
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -77,7 +84,6 @@ def login(request):
             'user': user_data,
         })
     return Response({'error': 'Invalid Credentials'}, status=400)
-
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -106,7 +112,6 @@ def generateWithInvitation(request):
         'access': str(refresh.access_token),
         'user': UserSerializer(user).data,
     })
-
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -149,7 +154,7 @@ def reset_password(request):
             return Response({'error': 'Failed to send email.'}, status=500)
     except User.DoesNotExist:
         return Response({'error': 'User with this email does not exist.'}, status=404)
-from django.utils.http import urlsafe_base64_decode
+
 def reset_password_confirm(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -168,7 +173,7 @@ def reset_password_confirm(request, uidb64, token):
         return render(request, 'core/reset_password_confirm.html', {'form': form, "uidb64":uidb64, "token":token})
     else:
         return HttpResponse("Invalid token", status=400)
-    
+
 def create_notification(user, message):
     if isinstance(user, User):
         Notification.objects.create(user=user, message=message)
@@ -212,38 +217,50 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated]
 
-
 class AlbumViewSet(viewsets.ModelViewSet):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'description', 'user__username']
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filterset_fields = ['user__id', 'name']
+    search_fields = ['name', 'description', 'user__id']
     permission_classes = [IsAuthenticated]
 
 class PhotoViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filterset_fields = ['tagged_users__username', 'location']
     search_fields = ['caption', 'location', 'tagged_users__username']
     permission_classes = [IsAuthenticated]
-
+    
     def perform_create(self, serializer):
+        # Save the photo object
         photo = serializer.save()
+        # Check if an image was uploaded
+        if 'image' in self.request.FILES:
+            image_file = self.request.FILES['image']
+            cloud_url = upload_file_to_s3(image_file)
+
+            # Decode the JSON string into a Python dictionary
+            decoded_dict = cloud_url
+            if cloud_url:
+                photo.cloud_url = decoded_dict.get('data')
+                photo.save()
+        # Log the activity
         log_activity(photo.album.user, 'uploaded photo', {'photo_id': photo.id})
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    filter_backends = [filters.SearchFilter]
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filterset_fields = ['name', 'albums__id', 'user__id']
     search_fields = ['name', 'user__username', 'albums__name']
     permission_classes = [IsAuthenticated]
-
 
 class GuestViewSet(viewsets.ModelViewSet):
     queryset = Guest.objects.all()
     serializer_class = GuestSerializer
     permission_classes = [IsAuthenticated]
-
 
 class InvitationViewSet(viewsets.ModelViewSet):
     queryset = Invitation.objects.all()
@@ -254,7 +271,6 @@ class InvitationViewSet(viewsets.ModelViewSet):
         invitation = serializer.save(sender=self.request.user)
         create_notification(invitation.recipient_email, f'You have been invited to the event: {invitation.event.name}')
         log_activity(self.request.user, 'sent invitation', {'invitation_id': invitation.id})
-
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
@@ -267,7 +283,6 @@ class CommentViewSet(viewsets.ModelViewSet):
         create_notification(comment.photo.tagged_users.all(),
                             f'You were tagged in a comment by {comment.user.username}')
 
-
 class SharedAlbumViewSet(viewsets.ModelViewSet):
     queryset = SharedAlbum.objects.all()
     serializer_class = SharedAlbumSerializer
@@ -277,15 +292,12 @@ class SharedAlbumViewSet(viewsets.ModelViewSet):
         shared_album = serializer.save()
         message = f'Album "{shared_album.album.name}" shared with you by {shared_album.album.user.username}'
         create_notification(shared_album.shared_with, message)
-        log_activity(shared_album.album.user, 'shared album',
-                     {'album_id': shared_album.album.id, 'shared_with': shared_album.shared_with.username})
-
+        log_activity(shared_album.album.user, 'shared album', {'album_id': shared_album.album.id, 'shared_with': shared_album.shared_with.username})
 
 class NotificationViewSet(viewsets.ModelViewSet):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
     permission_classes = [IsAuthenticated]
-
 
 class ActivityLogViewSet(viewsets.ModelViewSet):
     queryset = ActivityLog.objects.all()

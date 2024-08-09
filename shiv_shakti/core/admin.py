@@ -101,7 +101,7 @@ class SharedAlbumAdmin(admin.ModelAdmin):
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'phone', 'event']
-    search_fields = ['user__username', 'phone', 'event']
-    list_filter = ['event']
+    list_display = ['user', 'phone',]
+    search_fields = ['user__username', 'phone']
+    list_filter = ['user__username', 'phone']
     ordering = ['user__username']
