@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Quick Snap</title>
+
+    <!-- Favicons -->
+    <link href="{% static 'landing/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'landing/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'landing/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'landing/css/main.css' %}" rel="stylesheet">
+
+    <style>
+        .services-page h2 {
+            color: #007bff;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .services-page p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .service-item {
+            background: #f8f9fa;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-item .icon {
+            margin-bottom: 20px;
+        }
+
+        .service-item h3 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .service-item p {
+            color: #555;
+        }
+
+        .highlight-section {
+            background: #007bff;
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .highlight-section h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .highlight-section p {
+            color: #f8f9fa;
+        }
+
+        .highlight-section .btn-primary {
+            background-color: #fff;
+            color: #007bff;
+            border-color: #fff;
+        }
+
+        .highlight-section .btn-primary:hover {
+            background-color: #e9ecef;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body class="services-page">
+
+    {% include 'header.html' %}
+
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title dark-background" data-aos="fade">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1>Our Services</h1>
+                            <p class="mb-0">Discover the comprehensive services Quick Snap offers to make your memories
+                                last a lifetime.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="breadcrumbs">
+                <div class="container">
+                    <ol>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="current">Our Services</li>
+                    </ol>
+                </div>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <!-- Services Section -->
+        <section id="services" class="services py-5">
+            <div class="container">
+                <div class="row text-center">
+                    <!-- Service 1: In-App Camera -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-camera" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">In-App Camera</h3>
+                            <p class="service-description">Capture stunning, high-resolution photos instantly with our in-app camera. Perfect for all your special moments.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Event-Based Albums -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-folder" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">Event-Based Albums</h3>
+                            <p class="service-description">Organize your photos by events such as weddings, birthdays, and vacations, making them easy to find and share.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Secure Cloud Storage -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-cloud" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">Secure Cloud Storage</h3>
+                            <p class="service-description">Back up your precious memories with our secure cloud storage, ensuring they are always safe and accessible.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: Face Recognition -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-person" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">Face Recognition & Tagging</h3>
+                            <p class="service-description">Automatically tag and organize your photos with our advanced face recognition technology.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 5: Photo Editing -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-pencil-square" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">Photo Editing Tools</h3>
+                            <p class="service-description">Enhance your photos with our intuitive editing tools, including filters, cropping, and more.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 6: Sharing & Collaboration -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-share" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">Sharing & Collaboration</h3>
+                            <p class="service-description">Share your albums with friends and family, and invite them to contribute their own photos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 7: Privacy & Security -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-shield-lock" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">Privacy & Security</h3>
+                            <p class="service-description">Your privacy is our priority. Rest assured your data is protected with top-notch security measures.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 8: Multi-Platform Support -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-laptop" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">Multi-Platform Support</h3>
+                            <p class="service-description">Quick Snap works seamlessly across both iOS and Android platforms, so you can access your memories anywhere, anytime.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 9: 24/7 Customer Support -->
+                    <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-box shadow-sm p-4 h-100 rounded">
+                            <div class="service-icon mb-3">
+                                <i class="bi bi-headset" style="font-size: 3rem; color: #007bff;"></i>
+                            </div>
+                            <h3 class="service-title mb-3">24/7 Customer Support</h3>
+                            <p class="service-description">Our support team is available around the clock to assist you with any issues or questions you may have.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlight Section -->
+        <section class="highlight-section">
+            <div class="container">
+                <h2>Why Choose Quick Snap?</h2>
+                <p>Quick Snap offers a comprehensive and secure solution for capturing, organizing, and sharing your
+                    most treasured moments.</p>
+                <a href="#" class="btn btn-primary">Get Started Today</a>
+            </div>
+        </section><!-- /Highlight Section -->
+
+        <!-- More Services Section -->
+        <section id="more-services" class="services section">
+            <div class="container" data-aos="fade-up">
+                <div class="row gy-4">
+                    <!-- Service 7: Customizable Albums -->
+                    <div class="col-lg-6">
+                        <div class="service-item">
+                            <div class="icon">
+                                <img src="{% static 'landing/img/services/custom-albums.png' %}"
+                                    alt="Customizable Albums" class="img-fluid">
+                            </div>
+                            <h3>Customizable Albums</h3>
+                            <p>Design your albums to reflect your unique style. Add custom covers, layouts, and themes
+                                to make each album truly yours.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 8: Automatic Backup -->
+                    <div class="col-lg-6">
+                        <div class="service-item">
+                            <div class="icon">
+                                <img src="{% static 'landing/img/services/auto-backup.png' %}" alt="Automatic Backup"
+                                    class="img-fluid">
+                            </div>
+                            <h3>Automatic Backup</h3>
+                            <p>Never worry about losing your memories. Quick Snap automatically backs up your photos and
+                                videos to the cloud, giving you peace of mind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- /More Services Section -->
+
+    </main>
+
+    {% include 'footer.html' %}
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'landing/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'landing/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'landing/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'landing/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'landing/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'landing/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'landing/js/main.js' %}"></script>
+
+</body>
+
+</html>

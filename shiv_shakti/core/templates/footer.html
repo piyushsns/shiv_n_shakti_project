@@ -1,0 +1,68 @@
+<!-- templates/footer.html -->
+<footer id="footer" class="footer dark-background">
+    <div class="container footer-top">
+        <div class="row gy-4">
+            <div class="col-lg-4 col-md-6 footer-about">
+                <a href="{% url 'index' %}" class="logo d-flex align-items-center">
+                    <span class="sitename">Quick Snap</span>
+                </a>
+                <div class="footer-contact pt-3">
+                    <p>123 Memory Lane</p>
+                    <p>Los Angeles, CA 90001</p>
+                    <p class="mt-3"><strong>Phone:</strong> <span>+1 1234 5678 90</span></p>
+                    <p><strong>Email:</strong> <span>support@quicksnap.com</span></p>
+                </div>
+                <div class="social-links d-flex mt-4">
+                    <a href="https://twitter.com/QuickSnap"><i class="bi bi-twitter"></i></a>
+                    <a href="https://facebook.com/QuickSnap"><i class="bi bi-facebook"></i></a>
+                    <a href="https://instagram.com/QuickSnap"><i class="bi bi-instagram"></i></a>
+                    <a href="https://linkedin.com/company/QuickSnap"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-3 footer-links">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="/#about">About Us</a></li>
+                    <li><a href="/#features">Services</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-2 col-md-3 footer-links">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="#">Photo Capture</a></li>
+                    <li><a href="#">Event Management</a></li>
+                    <li><a href="#">Cloud Backup</a></li>
+                    <li><a href="#">Face Recognition</a></li>
+                    <li><a href="#">Photo Sharing</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 col-md-12 footer-newsletter">
+                <h4>Subscribe to Our Newsletter</h4>
+                <p>Stay updated with the latest features and events on Quick Snap by subscribing to our newsletter.
+                </p>
+                <form action="#" method="post" class="php-email-form">
+                    {% csrf_token %}
+                    <div class="newsletter-form"><input type="email" name="email"
+                            placeholder="Enter your email"><input type="submit" value="Subscribe"></div>
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Quick Snap</strong> <span>All Rights
+                Reserved</span></p>
+        <div class="credits">
+            Designed by <a href="https://quicksnap.com/">Quick Snap Team</a>
+        </div>
+    </div>
+</footer>

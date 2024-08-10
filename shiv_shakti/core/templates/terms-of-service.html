@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Quick Snap</title>
+
+    <!-- Favicons -->
+    <link href="{% static 'landing/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'landing/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'landing/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'landing/css/main.css' %}" rel="stylesheet">
+</head>
+
+<body class="terms-page">
+
+    {% include 'header.html' %}
+
+    <main class="main">
+
+        <!-- Page Title -->
+        <div class="page-title dark-background" data-aos="fade">
+            <div class="heading">
+                <div class="container">
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-lg-8">
+                            <h1>Terms of Service</h1>
+                            <p class="mb-0">Please read these terms of service carefully before using Quick Snap. By accessing or using the app, you agree to be bound by these terms.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="breadcrumbs">
+                <div class="container">
+                    <ol>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="current">Terms of Service</li>
+                    </ol>
+                </div>
+            </nav>
+        </div><!-- End Page Title -->
+
+        <!-- Terms of Service Content Section -->
+        <section id="terms-of-service" class="terms-of-service section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Terms of Service</h2>
+                <div><span>Review Our</span> <span class="description-title">Terms and Conditions</span></div>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade-up">
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing or using the Quick Snap application, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.</p>
+
+                <h2>2. Use of the Service</h2>
+                <p>Quick Snap grants you a personal, non-exclusive, non-transferable, limited license to use the app solely for your personal use. You agree not to use the service for any unlawful or prohibited activities.</p>
+
+                <h2>3. User Accounts</h2>
+                <p>To use certain features of Quick Snap, you may need to register an account. You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account.</p>
+
+                <h2>4. Privacy</h2>
+                <p>Your privacy is important to us. Please refer to our <a href="{% url 'privacy_policy' %}">Privacy Policy</a> for information on how we collect, use, and protect your data.</p>
+
+                <h2>5. Content Ownership</h2>
+                <p>All content that you upload or create using Quick Snap remains your property. However, by using our service, you grant Quick Snap a non-exclusive, royalty-free license to use, modify, and display your content solely for the purpose of providing the service.</p>
+
+                <h2>6. Prohibited Activities</h2>
+                <p>Users are prohibited from using Quick Snap for any illegal activities, including but not limited to:</p>
+                <ul>
+                    <li>Uploading content that infringes on the intellectual property rights of others.</li>
+                    <li>Engaging in activities that are harmful, abusive, or harassing to others.</li>
+                    <li>Attempting to gain unauthorized access to Quick Snap's systems or data.</li>
+                </ul>
+
+                <h2>7. Termination</h2>
+                <p>Quick Snap reserves the right to terminate your access to the service at any time, without notice, for any reason, including but not limited to violations of these terms.</p>
+
+                <h2>8. Limitation of Liability</h2>
+                <p>Quick Snap shall not be liable for any damages arising out of your use of the service, including but not limited to direct, indirect, incidental, or consequential damages.</p>
+
+                <h2>9. Changes to Terms</h2>
+                <p>We may update these Terms of Service from time to time. When we do, we will notify you by updating the date at the top of this page and providing a notice within the app. We encourage you to review these terms periodically to stay informed about any changes.</p>
+
+                <h2>10. Contact Us</h2>
+                <p>If you have any questions or concerns about these Terms of Service, please contact us at:</p>
+                <p><strong>Email:</strong> <a href="mailto:support@quicksnap.com">support@quicksnap.com</a></p>
+                <p><strong>Address:</strong> 123 Memory Lane, Los Angeles, CA 90001</p>
+            </div>
+
+        </section><!-- /Terms of Service Section -->
+
+    </main>
+
+    {% include 'footer.html' %}
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'landing/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'landing/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'landing/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'landing/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'landing/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'landing/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'landing/js/main.js' %}"></script>
+
+</body>
+
+</html>

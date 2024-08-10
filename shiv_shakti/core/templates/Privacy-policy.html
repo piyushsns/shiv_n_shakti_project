@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Quick Snap</title>
+
+    <!-- Favicons -->
+    <link href="{% static 'landing/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'landing/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'landing/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'landing/css/main.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="privacy-page">
+
+    {% include 'header.html' %}
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title dark-background" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Privacy Policy</h1>
+              <p class="mb-0">Your privacy is important to us. This policy explains how we collect, use, and protect your information.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li class="current">Privacy Policy</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <!-- Privacy Policy Content Section -->
+    <section id="privacy-policy" class="privacy-policy section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Privacy Policy</h2>
+        <div><span>Understand Our</span> <span class="description-title">Privacy Practices</span></div>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up">
+        <h2>1. Information We Collect</h2>
+        <p>When you use Quick Snap, we may collect the following types of information:</p>
+        <ul>
+            <li><strong>Personal Information:</strong> This includes your name, email address, phone number, and other details you provide during registration or profile updates.</li>
+            <li><strong>Event and Photo Data:</strong> Photos, videos, and related metadata (such as location, tags, and timestamps) that you upload or capture using the app.</li>
+            <li><strong>Usage Information:</strong> Data related to how you use the app, including features accessed, interactions with other users, and preferences.</li>
+            <li><strong>Device Information:</strong> Information about the device you use to access Quick Snap, such as device type, operating system, and unique device identifiers.</li>
+        </ul>
+
+        <h2>2. How We Use Your Information</h2>
+        <p>Your information is used to enhance your experience with Quick Snap and to provide our services effectively. Specifically, we may use your data for the following purposes:</p>
+        <ul>
+            <li>To create and manage your account, including authentication and profile management.</li>
+            <li>To allow you to capture, store, and organize photos and videos based on events.</li>
+            <li>To provide personalized features such as face recognition and automatic photo tagging.</li>
+            <li>To enable sharing of photos and albums with friends, family, and other users.</li>
+            <li>To improve the app’s functionality, user interface, and overall user experience.</li>
+            <li>To communicate with you regarding updates, new features, and customer support.</li>
+        </ul>
+
+        <h2>3. Sharing Your Information</h2>
+        <p>Quick Snap does not sell, rent, or share your personal information with third parties except as described below:</p>
+        <ul>
+            <li><strong>With Your Consent:</strong> We may share your information with third parties if you provide your explicit consent.</li>
+            <li><strong>Service Providers:</strong> We may share your data with trusted service providers who assist us in operating the app, such as cloud storage providers, analytics services, and customer support.</li>
+            <li><strong>Legal Requirements:</strong> We may disclose your information if required by law or to protect our legal rights and the safety of others.</li>
+        </ul>
+
+        <h2>4. Data Security</h2>
+        <p>We take the security of your data seriously and implement industry-standard measures to protect it. This includes encryption, secure data transmission, and regular security audits. However, no method of transmission over the internet or electronic storage is 100% secure, and we cannot guarantee absolute security.</p>
+
+        <h2>5. Your Rights</h2>
+        <p>You have the right to access, update, or delete your personal information at any time. You can do this by logging into your account and updating your profile settings. If you need further assistance, please contact our support team at <a href="mailto:support@quicksnap.com">support@quicksnap.com</a>.</p>
+
+        <h2>6. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy from time to time. When we do, we will notify you by updating the date at the top of this page and providing a notice within the app. We encourage you to review this policy periodically to stay informed about how we protect your data.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at:</p>
+        <p><strong>Email:</strong> <a href="mailto:support@quicksnap.com">support@quicksnap.com</a></p>
+        <p><strong>Address:</strong> 123 Memory Lane, Los Angeles, CA 90001</p>
+
+        <p>Thank you for trusting Quick Snap with your memories. We are committed to protecting your privacy and providing you with a secure and enjoyable experience.</p>
+      </div>
+
+    </section><!-- /Privacy Policy Section -->
+
+  </main>
+
+  {% include 'footer.html' %}
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'landing/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'landing/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'landing/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'landing/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'landing/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'landing/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'landing/js/main.js' %}"></script>
+
+</body>
+
+</html>

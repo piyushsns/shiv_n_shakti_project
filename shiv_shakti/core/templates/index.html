@@ -1,0 +1,768 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Index - Bootslander Bootstrap Template</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!-- Favicons -->
+    <link href="{% static 'landing/img/favicon.png' %}" rel="icon">
+    <link href="{% static 'landing/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'landing/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/aos/aos.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'landing/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{% static 'landing/css/main.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="index-page">
+
+    {% include 'header.html' %}
+
+    <main class="main">
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero section dark-background">
+            <img src="{% static 'landing/img/hero-bg-2.jpg' %}" alt="" class="hero-bg">
+
+            <div class="container">
+                <div class="row gy-4 justify-content-between">
+                    <div class="col-lg-4 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100">
+                        <img src="{% static 'landing/img/banner.png' %}" class="img-fluid animated"
+                            alt="Quick Snap App">
+                    </div>
+
+                    <div class="col-lg-6  d-flex flex-column justify-content-center" data-aos="fade-in">
+                        <h1>Capture Your Special Moments with <span>Quick Snap</span></h1>
+                        <p>Quick Snap is the ultimate app for capturing, organizing, and preserving your precious
+                            memories, especially designed for events like weddings and birthdays.</p>
+                        <div class="d-flex">
+                            <a href="#about" class="btn-get-started">Get Started</a>
+                            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8"
+                                class="glightbox btn-watch-video d-flex align-items-center"><i
+                                    class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 24 150 28" preserveAspectRatio="none">
+                <defs>
+                    <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18v44h-352z">
+                    </path>
+                </defs>
+                <g class="wave1">
+                    <use xlink:href="#wave-path" x="50" y="3" fill="#6DB3F2" opacity="0.6"></use>
+                </g>
+                <g class="wave2">
+                    <use xlink:href="#wave-path" x="50" y="0" fill="#4A90E2" opacity="0.6"></use>
+                </g>
+                <g class="wave3">
+                    <use xlink:href="#wave-path" x="50" y="9" fill="#357ABD" opacity="0.6"></use>
+                </g>
+            </svg>
+
+
+        </section><!-- /Hero Section -->
+
+        <!-- About Section -->
+        <section id="about" class="about section">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row align-items-xl-center gy-5">
+
+                    <div class="col-xl-5 content">
+                        <h3>About Quick Snap</h3>
+                        <h2>Preserve Your Memories with Ease</h2>
+                        <p>Quick Snap is a cutting-edge mobile application designed to help you capture, organize, and
+                            preserve your precious moments, especially during special events like weddings, birthdays,
+                            and anniversaries. With advanced features like face recognition and cloud storage, Quick
+                            Snap makes managing your photos effortless.</p>
+                        <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                    </div>
+
+                    <div class="col-xl-7">
+                        <div class="row gy-4 icon-boxes">
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
+                                <div class="icon-box">
+                                    <i class="bi bi-camera"></i>
+                                    <h3>Capture Every Moment</h3>
+                                    <p>Use our in-app camera or upload from your gallery to securely store your memories
+                                        in the cloud.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                                <div class="icon-box">
+                                    <i class="bi bi-calendar-event"></i>
+                                    <h3>Event-Based Albums</h3>
+                                    <p>Create and manage albums for your special events, keeping your memories organized
+                                        and accessible.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
+                                <div class="icon-box">
+                                    <i class="bi bi-people"></i>
+                                    <h3>Invite and Share</h3>
+                                    <p>Invite friends and family to view, comment, and contribute to your albums, all
+                                        with customizable permissions.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                            <div class="col-md-6" data-aos="fade-up" data-aos-delay="500">
+                                <div class="icon-box">
+                                    <i class="bi bi-person-check"></i>
+                                    <h3>Face Recognition</h3>
+                                    <p>Leverage our advanced face recognition technology to automatically tag and
+                                        organize photos.</p>
+                                </div>
+                            </div> <!-- End Icon Box -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section><!-- /About Section -->
+
+        <!-- Features Section -->
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="features-item">
+                            <i class="bi bi-camera" style="color: #ffbb2c;"></i>
+                            <h3><a href="" class="stretched-link">In-App Camera</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="features-item">
+                            <i class="bi bi-cloud-upload" style="color: #5578ff;"></i>
+                            <h3><a href="" class="stretched-link">Cloud Storage</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="features-item">
+                            <i class="bi bi-calendar-event" style="color: #e80368;"></i>
+                            <h3><a href="" class="stretched-link">Event-Based Albums</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="features-item">
+                            <i class="bi bi-people" style="color: #e361ff;"></i>
+                            <h3><a href="" class="stretched-link">Social Sharing</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="500">
+                        <div class="features-item">
+                            <i class="bi bi-tags" style="color: #47aeff;"></i>
+                            <h3><a href="" class="stretched-link">Automatic Tagging</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="600">
+                        <div class="features-item">
+                            <i class="bi bi-person-check" style="color: #ffa76e;"></i>
+                            <h3><a href="" class="stretched-link">Face Recognition</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
+                        <div class="features-item">
+                            <i class="bi bi-chat-left-dots" style="color: #11dbcf;"></i>
+                            <h3><a href="" class="stretched-link">Comments and Reactions</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+
+                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="800">
+                        <div class="features-item">
+                            <i class="bi bi-lock" style="color: #4233ff;"></i>
+                            <h3><a href="" class="stretched-link">Secure Backup</a></h3>
+                        </div>
+                    </div><!-- End Feature Item -->
+                </div>
+            </div>
+        </section><!-- /Features Section -->
+
+        <!-- Stats Section -->
+        <section id="stats" class="stats section light-background">
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="row gy-4">
+                    <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+                        <i class="bi bi-emoji-smile"></i>
+                        <div class="stats-item">
+                            <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1"
+                                class="purecounter"></span>
+                            <p>Happy Users</p>
+                        </div>
+                    </div><!-- End Stats Item -->
+
+                    <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+                        <i class="bi bi-journal-richtext"></i>
+                        <div class="stats-item">
+                            <span data-purecounter-start="0" data-purecounter-end="3000" data-purecounter-duration="1"
+                                class="purecounter"></span>
+                            <p>Photos Uploaded</p>
+                        </div>
+                    </div><!-- End Stats Item -->
+
+                    <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+                        <i class="bi bi-cloud"></i>
+                        <div class="stats-item">
+                            <span data-purecounter-start="0" data-purecounter-end="5000" data-purecounter-duration="1"
+                                class="purecounter"></span>
+                            <p>Photos Backed Up</p>
+                        </div>
+                    </div><!-- End Stats Item -->
+
+                    <div class="col-lg-3 col-md-6 d-flex flex-column align-items-center">
+                        <i class="bi bi-camera"></i>
+                        <div class="stats-item">
+                            <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1"
+                                class="purecounter"></span>
+                            <p>Events Captured</p>
+                        </div>
+                    </div><!-- End Stats Item -->
+                </div>
+            </div>
+        </section><!-- /Stats Section -->
+
+
+        <!-- Details Section -->
+        <section id="details" class="details section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Details</h2>
+                <div><span>Explore Our</span> <span class="description-title">Application Features</span></div>
+            </div><!-- End Section Title -->
+
+            <div class="container">
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
+                        <img src="{% static 'landing/img/Qsdeatails-1.png' %}" class="img-fluid" alt="In-App Camera">
+                    </div>
+                    <div class="col-md-7" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Capture Moments Instantly</h3>
+                        <p class="fst-italic">
+                            Quick Snap allows you to capture your special moments instantly using our in-app camera.
+                            Whether it's a wedding, birthday, or any other event, your memories are just a click away.
+                        </p>
+                        <ul>
+                            <li><i class="bi bi-check"></i><span> High-resolution photo capture with advanced
+                                    settings.</span></li>
+                            <li><i class="bi bi-check"></i> <span> Instant save to cloud storage for secure
+                                    backup.</span></li>
+                            <li><i class="bi bi-check"></i> <span> Seamless integration with event albums.</span></li>
+                        </ul>
+                    </div>
+                </div><!-- Features Item -->
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out"
+                        data-aos-delay="200">
+                        <img src="{% static 'landing/img/Qsdeatails-2.png' %}" class="img-fluid" alt="Event-Based Albums">
+                    </div>
+                    <div class="col-md-7 order-2 order-md-1" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Organize Memories by Events</h3>
+                        <p class="fst-italic">
+                            Create and manage event-based albums with ease. Quick Snap allows you to organize your
+                            photos by events, making it easy to relive those special moments.
+                        </p>
+                        <p>
+                            You can categorize your photos based on events like weddings, birthdays, or vacations, and
+                            share these albums with friends and family, allowing them to contribute their own photos to
+                            the album.
+                        </p>
+                    </div>
+                </div><!-- Features Item -->
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 d-flex align-items-center" data-aos="zoom-out">
+                        <img src="{% static 'landing/img/Qsdeatails-3.png' %}" class="img-fluid" alt="Face Recognition">
+                    </div>
+                    <div class="col-md-7" data-aos="fade-up">
+                        <h3>Advanced Face Recognition</h3>
+                        <p>Quick Snap's face recognition technology automatically identifies and tags people in your
+                            photos, making it easier to find and organize your memories.</p>
+                        <ul>
+                            <li><i class="bi bi-check"></i> <span> Automatic tagging of people in photos.</span></li>
+                            <li><i class="bi bi-check"></i><span> Create personalized albums for each person.</span>
+                            </li>
+                            <li><i class="bi bi-check"></i> <span> High accuracy and efficiency in photo
+                                    organization.</span></li>
+                        </ul>
+                    </div>
+                </div><!-- Features Item -->
+
+                <div class="row gy-4 align-items-center features-item">
+                    <div class="col-md-5 order-1 order-md-2 d-flex align-items-center" data-aos="zoom-out">
+                        <img src="{% static 'landing/img/details-4.png' %}" class="img-fluid"
+                            alt="Secure Backup and Sharing">
+                    </div>
+                    <div class="col-md-7 order-2 order-md-1" data-aos="fade-up">
+                        <h3>Secure Backup and Easy Sharing</h3>
+                        <p class="fst-italic">
+                            Your photos are safely backed up in the cloud with Quick Snap’s end-to-end encryption,
+                            ensuring that your memories are secure and easily accessible.
+                        </p>
+                        <p>
+                            Share your memories with loved ones through social media or private links. Quick Snap makes
+                            it easy to share entire albums or individual photos, with customizable access permissions.
+                        </p>
+                    </div>
+                </div><!-- Features Item -->
+
+            </div>
+
+        </section>
+        <!-- /Details Section -->
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Gallery</h2>
+                <div><span>Explore Our</span> <span class="description-title">Memories Gallery</span></div>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="row g-0">
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-1.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-1.jpg' %}" alt="Wedding Celebration"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-2.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-2.jpg' %}" alt="Birthday Party"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-3.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-3.jpg' %}" alt="Anniversary"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-4.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-4.jpg' %}" alt="Vacation Memories"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-5.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-5.jpg' %}" alt="Family Gathering"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-6.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-6.jpg' %}" alt="Outdoor Adventure"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-7.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-7.jpg' %}" alt="Holiday Celebration"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                    <div class="col-lg-3 col-md-4">
+                        <div class="gallery-item">
+                            <a href="{% static 'landing/img/gallery/gallery-8.jpg' %}" class="glightbox"
+                                data-gallery="images-gallery">
+                                <img src="{% static 'landing/img/gallery/gallery-8.jpg' %}" alt="Corporate Event"
+                                    class="img-fluid">
+                            </a>
+                        </div>
+                    </div><!-- End Gallery Item -->
+
+                </div>
+
+            </div>
+
+        </section><!-- /Gallery Section -->
+        <!-- /Gallery Section -->
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="testimonials section dark-background">
+
+            <img src="{% static 'landing/img/testimonials-bg.jpg' %}" class="testimonials-bg" alt="">
+
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="swiper init-swiper">
+                    <script type="application/json" class="swiper-config">
+                        {
+                          "loop": true,
+                          "speed": 600,
+                          "autoplay": {
+                            "delay": 5000
+                          },
+                          "slidesPerView": "auto",
+                          "pagination": {
+                            "el": ".swiper-pagination",
+                            "type": "bullets",
+                            "clickable": true
+                          }
+                        }
+                    </script>
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{% static 'landing/img/testimonials/testimonials-1.jpg' %}"
+                                    class="testimonial-img" alt="">
+                                <h3>Emily Johnson</h3>
+                                <h4>Event Planner</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Quick Snap made organizing and sharing photos from my client's wedding
+                                        incredibly easy. The face recognition and album features are a game
+                                        changer!</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{% static 'landing/img/testimonials/testimonials-2.jpg' %}"
+                                    class="testimonial-img" alt="">
+                                <h3>Sara Wilsson</h3>
+                                <h4>Event Coordinator</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Quick Snap has been a game-changer for managing photos from all our events.
+                                        The ability to automatically organize and securely share event photos with
+                                        clients and colleagues has made our workflow much more efficient.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{% static 'landing/img/testimonials/testimonials-3.jpg' %}"
+                                    class="testimonial-img" alt="">
+                                <h3>Linda Roberts</h3>
+                                <h4>Family Reunion Organizer</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Using Quick Snap for our family reunion was fantastic. Everyone could
+                                        contribute their photos, and the app made it easy to create a beautiful shared
+                                        album.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{% static 'landing/img/testimonials/testimonials-4.jpg' %}"
+                                    class="testimonial-img" alt="">
+                                <h3>John Smith</h3>
+                                <h4>Corporate Event Organizer</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>Quick Snap’s secure backup and easy sharing options were perfect for our
+                                        company’s event. We could share photos with employees securely and
+                                        effortlessly.</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="testimonial-item">
+                                <img src="{% static 'landing/img/testimonials/testimonials-5.jpg' %}"
+                                    class="testimonial-img" alt="">
+                                <h3>Michael Brown</h3>
+                                <h4>Photographer</h4>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
+                                        class="bi bi-star-fill"></i>
+                                </div>
+                                <p>
+                                    <i class="bi bi-quote quote-icon-left"></i>
+                                    <span>As a professional photographer, Quick Snap has streamlined my workflow. I can
+                                        easily upload, tag, and share event photos with clients. Highly
+                                        recommend!</span>
+                                    <i class="bi bi-quote quote-icon-right"></i>
+                                </p>
+                            </div>
+                        </div><!-- End testimonial item -->
+
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+
+        </section><!-- /Testimonials Section -->
+        <!-- /Testimonials Section -->
+
+        <!-- Faq Section -->
+        <section id="faq" class="faq section light-background">
+
+            <div class="container-fluid">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-7 d-flex flex-column justify-content-center order-2 order-lg-1">
+
+                        <div class="content px-xl-5" data-aos="fade-up" data-aos-delay="100">
+                            <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
+                            <p>
+                                Have questions about using Quick Snap? We've compiled some of the most common questions
+                                our users have to help you get the most out of our app.
+                            </p>
+                        </div>
+
+                        <div class="faq-container px-xl-5" data-aos="fade-up" data-aos-delay="200">
+
+                            <div class="faq-item faq-active">
+                                <i class="faq-icon bi bi-question-circle"></i>
+                                <h3>How do I create an event-based album?</h3>
+                                <div class="faq-content">
+                                    <p>
+                                        Creating an event-based album is easy! Simply go to the "Albums" section, click
+                                        on "Create New Album," and select the event type. You can then upload photos
+                                        directly to the album or move existing photos into it.
+                                    </p>
+                                </div>
+                                <i class="faq-toggle bi bi-chevron-right"></i>
+                            </div><!-- End Faq item-->
+
+                            <div class="faq-item">
+                                <i class="faq-icon bi bi-question-circle"></i>
+                                <h3>Can I share my albums with friends and family?</h3>
+                                <div class="faq-content">
+                                    <p>
+                                        Yes, Quick Snap makes it easy to share your albums! You can invite others to
+                                        view, comment on, and even contribute photos to your albums. Just go to the
+                                        album settings and choose the sharing option that works best for you.
+                                    </p>
+                                </div>
+                                <i class="faq-toggle bi bi-chevron-right"></i>
+                            </div><!-- End Faq item-->
+
+                            <div class="faq-item">
+                                <i class="faq-icon bi bi-question-circle"></i>
+                                <h3>How secure is my data on Quick Snap?</h3>
+                                <div class="faq-content">
+                                    <p>
+                                        Your data security is our top priority. All your photos are encrypted and
+                                        securely stored on AWS S3. We use end-to-end encryption to ensure that your
+                                        memories are safe and only accessible to you and those you choose to share them
+                                        with.
+                                    </p>
+                                </div>
+                                <i class="faq-toggle bi bi-chevron-right"></i>
+                            </div><!-- End Faq item-->
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-5 order-1 order-lg-2">
+                        <img src="{% static 'landing/img/faq.jpg' %}" class="img-fluid" alt="FAQ Image"
+                            data-aos="zoom-in" data-aos-delay="100">
+                    </div>
+                </div>
+
+            </div>
+
+        </section><!-- /Faq Section -->
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+
+            <!-- Section Title -->
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Contact</h2>
+                <div><span>Check Our</span> <span class="description-title">Contact</span></div>
+            </div><!-- End Section Title -->
+
+            <div class="container" data-aos="fade" data-aos-delay="100">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-4">
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="200">
+                            <i class="bi bi-geo-alt flex-shrink-0"></i>
+                            <div>
+                                <h3>Address</h3>
+                                <p>A108 Adam Street, New York, NY 535022</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-telephone flex-shrink-0"></i>
+                            <div>
+                                <h3>Call Us</h3>
+                                <p>+1 5589 55488 55</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-envelope flex-shrink-0"></i>
+                            <div>
+                                <h3>Email Us</h3>
+                                <p>info@example.com</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                    </div>
+
+                    <div class="col-lg-8">
+                        <form action="#" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+                            {% csrf_token %}
+                            <div class="row gy-4">
+
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name"
+                                        required>
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <input type="email" class="form-control" name="email" placeholder="Your Email"
+                                        required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                        required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="message" rows="6" placeholder="Message"
+                                        required></textarea>
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <div class="loading">Loading</div>
+                                    <div class="error-message"></div>
+                                    <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                    <button type="submit">Send Message</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div><!-- End Contact Form -->
+
+                </div>
+
+            </div>
+
+        </section><!-- /Contact Section -->
+
+    </main>
+
+    {% include 'footer.html' %}
+
+
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'landing/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'landing/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'landing/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'landing/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'landing/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'landing/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'landing/js/main.js' %}"></script>
+
+</body>
+
+</html>

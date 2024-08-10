@@ -17,6 +17,20 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.core.mail import send_mail
+# from django.views.generic import TemplateView
+from django.shortcuts import render
+
+def index_view(request):
+    return render(request, 'index.html')
+
+def services(request):
+    return render(request, 'services.html')
+
+def privacy_policy_view(request):
+    return render(request, 'Privacy-policy.html')
+
+def terms_of_service(request):
+    return render(request, 'terms-of-service.html')
 
 class SearchView(generics.ListAPIView):
     serializer_class = serializers.SerializerMethodField()
@@ -204,3 +218,5 @@ class ActivityLogViewSet(viewsets.ModelViewSet):
     queryset = ActivityLog.objects.all()
     serializer_class = ActivityLogSerializer
     permission_classes = [IsAuthenticated]
+
+
