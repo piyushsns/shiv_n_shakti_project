@@ -10,8 +10,7 @@ class UserProfile(models.Model):
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
-    event = models.CharField(max_length=255, blank=True, null=True)
-
+    
     def __str__(self):
         return self.user.username
 
@@ -28,6 +27,7 @@ class Photo(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='photos')
     image = models.ImageField(upload_to='photos/')
     caption = models.CharField(max_length=255, blank=True, null=True)
+    cloud_url = models.TextField(blank=True, null=True)
     tagged_users = models.ManyToManyField(User, related_name='tagged_photos', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=255, blank=True, null=True)
@@ -71,14 +71,22 @@ class Guest(models.Model):
 
     def __str__(self):
         return self.name
+    
+class InvitationCode(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='invitation')
+    code = models.CharField(max_length=255, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"Invitation code for {self.user.username}"
+    
 class Invitation(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_invitations')
     recipient_email = models.EmailField()
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='invitations')
     status = models.CharField(max_length=50, choices=[('pending', 'Pending'), ('accepted', 'Accepted'), ('declined', 'Declined')], default='pending')
     sent_at = models.DateTimeField(auto_now_add=True)
-
+    invitation_code = models.CharField(max_length=255, unique=True, default="", blank=True)
     def __str__(self):
         return f'Invitation from {self.sender} to {self.recipient_email}'
 
@@ -123,12 +131,3 @@ class ActivityLog(models.Model):
 
     def __str__(self):
         return f'ActivityLog by {self.user.username} - {self.action}'
-    
-    
-class InvitationCode(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='invitation')
-    code = models.CharField(max_length=255, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"Invitation code for {self.user.username}"

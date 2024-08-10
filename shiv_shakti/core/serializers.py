@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import UserProfile, Album, Photo, Event, Guest, Invitation, Comment, SharedAlbum, Notification, ActivityLog
+from .models import (ActivityLog, Album, Comment, Event, Guest, Invitation, Notification, Photo, SharedAlbum, UserProfile)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
